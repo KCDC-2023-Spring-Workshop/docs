@@ -1,8 +1,8 @@
 # Resources
 
-This is a list of resources we recommend.
+This is a list of resources we discussed during the workshop or that we recommend.
 
-## Documentation 
+## Documentation
 
 - [Spring Framework Reference](https://docs.spring.io/spring-framework/docs/current/reference/html/)
 - [Spring Framework API](https://docs.spring.io/spring-framework/docs/current/javadoc-api/)
@@ -15,7 +15,7 @@ This is a list of resources we recommend.
 
 - [Spring Boot Up and Running - Mark Heckler](https://amzn.to/3WOSutb)
 - [Learning Spring Boot 3.0 - Greg Turnquist](https://amzn.to/3CuCgxc)
-- [Spring Boot in Action - Craig Walls](https://amzn.to/3ZcI3kx) - Use Promo code `ctwcodemash23` for 35% off
+- [Spring Boot in Action - Craig Walls](https://amzn.to/3ZcI3kx)
 
 ## Podcasts
 
