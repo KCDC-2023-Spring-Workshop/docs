@@ -71,24 +71,17 @@ iteration of it we will use it track indoor and outdoor runs.
     - IDE
     - Maven
     - View the application / browser & command-line
-- Core Fundamentals & Features
   - Structuring your code
-  - Spring IoC Container / Application Context
-  - Spring Beans
-  - Dependency Injection
-  - Configuration
-  - Profiles
-  - Actuator
-  - Logging
-  - DevTools
 - Spring Web (MVC)
   - Model View Controller (MVC)
-  - Static index.html support
+  - Spring IoC Container / Application Context
+  - Spring Beans
   - Building REST APIs
     - Annotations
     - CRUD REST API
     - API testing (curl/httpie/postman)
     - CORS
+  - Dependency Injection
   - Error Handling
   - Data Validation
 - Data
@@ -112,3 +105,11 @@ iteration of it we will use it track indoor and outdoor runs.
   - Uber Jar
   - Containers
   - Native Images using GraalVM
+
+- Spring Fundamentals
+  - Core Fundamentals & Features
+  - Configuration
+  - Profiles
+  - Actuator
+  - Logging
+  - DevTools
