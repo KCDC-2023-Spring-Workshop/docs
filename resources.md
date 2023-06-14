@@ -17,9 +17,14 @@ This is a list of resources we discussed during the workshop or that we recommen
 - [Learning Spring Boot 3.0 - Greg Turnquist](https://amzn.to/3CuCgxc)
 - [Spring Boot in Action - Craig Walls](https://amzn.to/3ZcI3kx)
 
+## Videos
+
+- [Spring Boot Tutorial for Beginners - 2023 Crash Course using Spring Boot 3](https://www.youtube.com/watch?v=UgX5lgv4uVM)
+
 ## Podcasts
 
 - [Bootiful Podcast - Josh Long](http://bootifulpodcast.fm/)
+- [Spring Office Hours Podcast](http://www.springofficehours.io)
 
 ## YouTube
 
@@ -34,6 +39,5 @@ This is a list of resources we discussed during the workshop or that we recommen
 
 ## Dan & DaShaun
 
-- [Spring Office Hours](https://tanzu.vmware.com/developer/tv/spring-office-hours/)
 - [Dan Vega](https://www.danvega.dev)
 - [DaShaun Carter](https://dashaun.com/)

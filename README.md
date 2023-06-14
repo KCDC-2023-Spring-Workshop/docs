@@ -4,8 +4,7 @@ Learn the fundamentals of Spring, build and deploy your first application.
 
 ## Runerz Application
 
-The application you will build during this workshop revolves around the domain of tracking physical fitness. In the first
-iteration of it we will use it track indoor and outdoor runs.
+The application you will build during this workshop revolves around the domain of tracking physical fitness. In the first iteration of it we will use it track indoor and outdoor runs.
 
 ## Objectives and Outcomes
 
@@ -31,6 +30,7 @@ iteration of it we will use it track indoor and outdoor runs.
     - [Postman](https://www.postman.com/product/rest-client/)
     - [HTTPie](https://httpie.io/)
     - [curl](https://curl.se/)
+    - IntelliJ Ultimate
   - Docker Desktop
 
 ## Agenda
@@ -74,9 +74,16 @@ iteration of it we will use it track indoor and outdoor runs.
   - Structuring your code
 - Spring Web (MVC)
   - Model View Controller (MVC)
-  - Spring IoC Container / Application Context
-  - Spring Beans
+    - What is MVC (Model/View/Controller)
+  - Spring MVC
+    - Model
+    - Controller
+  - Spring Core
+    - Spring IoC Container / Application Context
+    - Spring Beans
+    - Dependency Injection
   - Building REST APIs
+    - What is REST API
     - Annotations
     - CRUD REST API
     - API testing (curl/httpie/postman)
