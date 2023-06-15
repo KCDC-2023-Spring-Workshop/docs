@@ -4,6 +4,9 @@
   - Uber Jar
   - Containers
   - Native Images using GraalVM
+  - Hosts
+  - Resources
+  - Deploy to production
 
 Production is the greatest place on the web! We should all want to go there but we get it, it can be a scary place.
 
@@ -100,3 +103,7 @@ Here are a few videos from Spring Office Hours and Dan's YouTube channel on movi
 - [Spring Boot Azure](https://youtu.be/53T_R3xAPTg)
 - [Spring Boot Heroku](https://youtu.be/lGtTOLKuvqs)
 - [Spring BOot Railway](https://youtu.be/5sVxvF47dcU)
+
+## Deploy to Production
+
+steps to deploy to production
