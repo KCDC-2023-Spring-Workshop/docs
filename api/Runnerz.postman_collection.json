@@ -133,7 +133,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/runs/filter/Wednesday",
+					"raw": "localhost:8080/api/runs/filter/title-starts-with/Monday",
 					"host": [
 						"localhost"
 					],
@@ -142,7 +142,8 @@
 						"api",
 						"runs",
 						"filter",
-						"Wednesday"
+						"title-starts-with",
+						"Monday"
 					]
 				}
 			},
