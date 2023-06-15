@@ -340,22 +340,22 @@ class RunControllerTest {
 - This is the contract that guarantees that this method will be invoked only once in the bean lifecycle. It may happen (though unlikely) that a bean is instantiated multiple times by the container in its internal working, but it guarantees that @PostConstruct will be invoked only once.
 
 ```java
-    @PostConstruct
-    private void init() {
-        runs.add(new Run(1,
-                "Monday Morning Run",
-                LocalDateTime.now(),
-                LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
-                3,
-                Location.INDOOR));
+@PostConstruct
+private void init() {
+    runs.add(new Run(1,
+            "Monday Morning Run",
+            LocalDateTime.now(),
+            LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
+            3,
+            Location.INDOOR));
 
-        runs.add(new Run(2,
-                "Wednesday Evening Run",
-                LocalDateTime.now(),
-                LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
-                6,
-                Location.INDOOR));
-    }
+    runs.add(new Run(2,
+            "Wednesday Evening Run",
+            LocalDateTime.now(),
+            LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
+            6,
+            Location.INDOOR));
+}
 ```
 
 
@@ -412,6 +412,74 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 - [@ResponseStatus](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html) - Marks a method or exception class with the status code() and reason() that should be returned.
 
 ### CRUD REST API
+
+Let's build out the remainder of our REST API.
+
+
+```java
+@RestController
+@RequestMapping("/api/runs")
+public class RunController {
+
+    private final List<Run> runs = new ArrayList<>();
+
+    @GetMapping
+    public List<Run> findAll() {
+        return runs;
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Run> findById(@PathVariable Integer id) {
+        return runs.stream().filter(run -> run.id().equals(id)).findFirst();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void create(@RequestBody Run run) {
+        runs.add(run);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    public void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
+        var currentRun = runs.stream().filter(r -> r.id().equals(id)).findFirst();
+        currentRun.ifPresent(value -> runs.set(runs.indexOf(value),run));
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        runs.removeIf(run -> run.id().equals(id));
+    }
+
+    // http://localhost:8080/api/runs/filter-by-title?title=Monday
+    @GetMapping("/filter-by-title")
+    public List<Run> findByTitleStartingWith(@RequestParam String title) {
+        return runs.stream().filter(r -> r.title().startsWith(title)).collect(Collectors.toList());
+    }
+
+    @PostConstruct
+    private void init() {
+        runs.add(new Run(1,
+                "Monday Morning Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
+                3,
+                Location.INDOOR));
+
+        runs.add(new Run(2,
+                "Wednesday Evening Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
+                6,
+                Location.INDOOR));
+    }
+
+}
+```
+
+You can also return a [ResponseEntity](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html) from your controller methods. This allows you to return a custom status code and headers.
+
 
 ### API Testing
 
@@ -475,7 +543,41 @@ If we haven't had a chance to talk about [Spring Boot DevTools](./SpringCore.md)
 
 ## Error Handling
 
-TBD
+The current implmentation of our `findById` method will return a null value if the run is not found. This is not ideal. We should return a 404 status code if the run is not found. We can add some detail to that response as well by throwing a custom exception.
+
+```java
+@GetMapping("/{id}")
+public Optional<Run> findById(@PathVariable Integer id) {
+    return runs.stream().filter(run -> run.id().equals(id)).findFirst();
+}
+```
+
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class RunNotFoundException extends RuntimeException {
+
+    public RunNotFoundException(String message) {
+        super(message);
+    }
+
+    public RunNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+```
+
+```java
+@GetMapping("/{id}")
+public Optional<Run> findById(@PathVariable Integer id) {
+    return Optional.ofNullable(runs.stream().filter(run -> run.id().equals(id)).findFirst().orElseThrow(() -> new RunNotFoundException("Run " + id + " not found.")));
+}
+```
+
+```bash
+🚀 curl http://localhost:8080/api/runs/99
+
+{"timestamp":"2023-06-15T19:03:00.236+00:00","status":404,"error":"Not Found","message":"Run 99 not found.","path":"/api/runs/99"}%
+```
 
 ## RunnerzUI
 
