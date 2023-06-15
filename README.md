@@ -48,13 +48,14 @@ The application you will build during this workshop revolves around the domain o
   - How to start the application
   - Structuring your code
 - Spring Web (MVC)
+  - Runnerz UI Application Introduction
   - Model View Controller (MVC)
   - Spring MVC
   - Spring Core
   - Building REST APIs
-  - Error Handling
   - Data Validation
-  - RunnerzUI (UI/REST API/CORS/etc...)
+  - Error Handling
+  - Runnerz UI Application Completed
 - Data
   - Java + SQL Databases
   - Spring Data JDBC API

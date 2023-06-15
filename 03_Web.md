@@ -1,5 +1,6 @@
 # Spring MVC (Web)
 
+  - RunnerzUI Introduction
   - Model View Controller (MVC)
     - What is MVC (Model/View/Controller)
   - Spring MVC
@@ -10,17 +11,26 @@
     - Spring Beans
     - Dependency Injection
   - Building REST APIs
+    - What is an API
     - What is REST API
+      - HTTP Request Methods
+      - HTTP Response Status Codes
     - Annotations
     - CRUD REST API
+      - GET/POST/PUT/DELETE/
+      - Filter to show off `@RequestParam`
     - API testing (curl/httpie/postman)
       - validate that the postman api collection works
       - validate that the intellij api collection works
     - CORS
-  - Dependency Injection
-  - Error Handling
   - Data Validation
+  - Error Handling
   - RunnerzUI (UI/REST API/CORS/etc...)
+
+
+## RunnerzUI Introduction
+
+In this section you will be introduced to the RunnerzUI application. This application will be used throughout the course to demonstrate the concepts we are learning.
 
 ## Model View Controller (MVC)
 
@@ -39,11 +49,6 @@ The view defines how the app's data should be displayed.
 ### Controller
 
 The controller contains logic that updates the model and/or view in response to input from the users of the app.
-
-
-### MVC Arond the web
-
-what other MVC frameworks are out there?
 
 ## Spring MVC
 
@@ -356,20 +361,6 @@ class RunControllerTest {
 
 ## Building REST APIs
 
-  - Building REST APIs
-    - What is REST API
-    - Request Methods
-    - Http Status Codes
-    - Annotations
-        - @RestController
-        - @RequestMapping
-        - @ResponseStatus
-        - etc
-    - CRUD REST API
-        - GET / POST / PUT / DELETE
-    - API testing (curl/httpie/postman)
-    - CORS
-
 ### APIs
 
 API stands for Application Programming Interface. An API is a software intermediary that allows two applications to talk to each other. In other words, an API is the messenger that delivers your request to the provider that you're requesting it from and then delivers the response back to you.
@@ -382,7 +373,7 @@ The basic idea of REST is that a resource, e.g. a document, is transferred via w
 
 HTTP APIs in general are sometimes colloquially referred to as RESTful APIs, RESTful services, or REST services, although they don't necessarily adhere to all REST constraints. Beginners can assume a REST API means an HTTP service that can be called using standard web libraries and tools.
 
-### HTTP Request Methods
+#### HTTP Request Methods
 
 HTTP defines a set of request methods to indicate the desired action to be performed for a given resource. Although they can also be nouns, these request methods are sometimes referred to as HTTP verbs. Each of them implements a different semantic, but some common features are shared by a group of them: e.g. a request method can be safe, idempotent, or cacheable.
 
@@ -392,7 +383,7 @@ HTTP defines a set of request methods to indicate the desired action to be perfo
 - **PUT**: The PUT method replaces all current representations of the target resource with the request payload.
 - **DELETE**: The DELETE method deletes the specified resource.
 
-### HTTP Response Status Codes
+#### HTTP Response Status Codes
 
 HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:
 
@@ -422,11 +413,72 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 
 ### CRUD REST API
 
+### API Testing
+
+## Cross-Origin Resource Sharing (CORS)
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+
+An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses XMLHttpRequest to make a request for https://domain-b.com/data.json.
+
+For security reasons, browsers restrict cross-origin HTTP requests initiated from scripts. For example, XMLHttpRequest and the Fetch API follow the same-origin policy. This means that a web application using those APIs can only request resources from the same origin the application was loaded from unless the response from other origins includes the right CORS headers.
+
+[@CrossOrigin](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/CrossOrigin.html) - Annotation for permitting cross-origin requests on specific handler classes and/or handler methods. Processed if an appropriate HandlerMapping is configured.
+
+```java
+@RestController
+@RequestMapping("/api/runs")
+@CrossOrigin("http://localhost:3000")
+public class RunController {
+
+  ...
+
+}
+```
 
 ## Data Validation
 
+The Spring Framework provides support for the Java Bean Validation API.
+
+Bean Validation provides a common way of validation through constraint declaration and metadata for Java applications. To use it, you annotate domain model properties with declarative validation constraints which are then enforced by the runtime. There are built-in constraints, and you can also define your own custom constraints.
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
+```java
+public record Run(
+        Integer id,
+        @NotEmpty
+        String title,
+        LocalDateTime startedOn,
+        LocalDateTime completedOn,
+        @Positive
+        Integer miles,
+        Location location
+) {
+
+  // ...
+
+}
+```
+
+```properties
+server.error.include-binding-errors=always
+server.error.include-message=always
+```
+
+If we haven't had a chance to talk about [Spring Boot DevTools](./SpringCore.md) we can have that discussion now.
+
 ## Error Handling
 
+TBD
+
 ## RunnerzUI
+
+Let's check back in with DaShaun as he builds out the UI for Runnerz.
 
 [RunnerzUI](./RunnerzUI.md)
