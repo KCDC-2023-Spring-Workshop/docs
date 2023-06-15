@@ -9,9 +9,9 @@ The application you will build during this workshop revolves around the domain o
 ## Objectives and Outcomes
 
 - Learn how to create a basic Spring Boot application.
-- Learn a few of the fundamentals of Spring
-- Build a CRUD REST API
-- Connect to a database
+- Learn some of the core fundamentals of Spring Framework.
+- Build a full functional REST API.
+- Connect to a database to read and persist data.
 - Deploy a Spring Boot application into production
 
 ## Prerequisites
