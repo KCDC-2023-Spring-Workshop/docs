@@ -30,8 +30,8 @@ In this section you will begin to build out the foundation for our Runnerz Appli
 ### Model
 
 - Run
-  - build out as a normal class first
-  - then convert to a record
+  - Create `Run.java` as a class
+  - Convert to a record
 - Location (Enum)
 
 ```java
@@ -55,11 +55,55 @@ public enum Location {
 
 ### View (JSON)
 
-```json
+JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications (e.g., sending some data from the server to the client, so it can be displayed on a web page, or vice versa).
 
+```json
+{
+"id": 1,
+"title": "Monday Morning Run",
+"startedOn": "2023-06-15T09:29:43.013931",
+"completedOn": "2023-06-15T09:59:43.013945",
+"miles": 3,
+"location": "INDOOR",
+"duration": "PT30M0.000014S",
+"avgPace": 10
+}
+```
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Monday Morning Run",
+    "startedOn": "2023-06-15T09:29:43.013931",
+    "completedOn": "2023-06-15T09:59:43.013945",
+    "miles": 3,
+    "location": "INDOOR",
+    "duration": "PT30M0.000014S",
+    "avgPace": 10
+  },
+  {
+    "id": 2,
+    "title": "Wednesday Evening Run",
+    "startedOn": "2023-06-15T09:29:43.014008",
+    "completedOn": "2023-06-15T10:29:43.014011",
+    "miles": 6,
+    "location": "INDOOR",
+    "duration": "PT1H0.000003S",
+    "avgPace": 10
+  }
+]
 ```
 
 ### Controller
+
+- RunController
+  - Create `RunController.java` as a class
+  - Convert to a `@RestController`
+  - Add `@RequestMapping("/api/runs")`
+  - Add `@GetMapping`
+  - Add `@GetMapping("/{id}")`
+  - Add `@PostConstruct` to initialize some data
 
 ```java
 @RestController
@@ -76,6 +120,23 @@ public class RunController {
     @GetMapping("/{id}")
     public Optional<Run> findById(@PathVariable Integer id) {
         return runs.stream().filter(run -> run.id().equals(id)).findFirst();
+    }
+
+    @PostConstruct
+    private void init() {
+        runs.add(new Run(1,
+                "Monday Morning Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
+                3,
+                Location.INDOOR));
+
+        runs.add(new Run(2,
+                "Wednesday Evening Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
+                6,
+                Location.INDOOR));
     }
 
 }
@@ -249,9 +310,72 @@ class RunControllerTest {
     - Request Methods
     - Http Status Codes
     - Annotations
+        - @RestController
+        - @RequestMapping
+        - @ResponseStatus
+        - etc
     - CRUD REST API
+        - GET / POST / PUT / DELETE
     - API testing (curl/httpie/postman)
     - CORS
+
+### APIs
+
+API stands for Application Programming Interface. An API is a software intermediary that allows two applications to talk to each other. In other words, an API is the messenger that delivers your request to the provider that you're requesting it from and then delivers the response back to you.
+
+### REST APIs
+
+REST (Representational State Transfer) refers to a group of software architecture design constraints that bring about efficient, reliable and scalable distributed systems.
+
+The basic idea of REST is that a resource, e.g. a document, is transferred via well-recognized, language-agnostic, and reliably standardized client/server interactions. Services are deemed RESTful when they adhere to these constraints.
+
+HTTP APIs in general are sometimes colloquially referred to as RESTful APIs, RESTful services, or REST services, although they don't necessarily adhere to all REST constraints. Beginners can assume a REST API means an HTTP service that can be called using standard web libraries and tools.
+
+### HTTP Request Methods
+
+HTTP defines a set of request methods to indicate the desired action to be performed for a given resource. Although they can also be nouns, these request methods are sometimes referred to as HTTP verbs. Each of them implements a different semantic, but some common features are shared by a group of them: e.g. a request method can be safe, idempotent, or cacheable.
+
+GET
+The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+
+HEAD
+The HEAD method asks for a response identical to a GET request, but without the response body.
+
+POST
+The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+
+PUT
+The PUT method replaces all current representations of the target resource with the request payload.
+
+DELETE
+The DELETE method deletes the specified resource.
+
+CONNECT
+The CONNECT method establishes a tunnel to the server identified by the target resource.
+
+OPTIONS
+The OPTIONS method describes the communication options for the target resource.
+
+TRACE
+The TRACE method performs a message loop-back test along the path to the target resource.
+
+PATCH
+The PATCH method applies partial modifications to a resource.
+
+### HTTP Response Status Codes
+
+HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:
+
+- Informational responses (100 – 199)
+- Successful responses (200 – 299)
+- Redirection messages (300 – 399)
+- Client error responses (400 – 499)
+- Server error responses (500 – 599)
+
+### Annotations
+
+### CRUD REST API
+
 
 ## Data Validation
 
