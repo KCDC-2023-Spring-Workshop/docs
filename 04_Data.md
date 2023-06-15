@@ -5,6 +5,7 @@
   - Configuring a Datasource
     - H2
     - PostgreSQL
+    - Spring Boot Docker Compose Module
   - Populate a Database
     - DDL Script
     - Programmatically
@@ -28,7 +29,7 @@ Spring Boot integrates with a number of data technologies, both SQL and NoSQL.
 I want to kick off the discussion by taking a trip down memory lane. We are going to take a look at an example
 application to see how we can use JDBC (Java DataBase Connectivity) to connect to a database in Java and execute queries.
 
-https://github.com/CodeMash-2023-Spring-Workshop/hello-jdbc
+https://github.com/KCDC-2023-Spring-Workshop/hello-jdbc
 
 ## Spring JDBC API
 
@@ -42,9 +43,6 @@ org.springframework.jdbc.core; -> [API Documentation](https://docs.spring.io/spr
 - start.spring.io
   - JDBC API
   - H2 Database
-- Checkout the branch `spring-jdbc-start` in the runnerz app
-  - This is a continuation of what you saw in the REST API lecture
-  - There is a `spring-jdbc-complete` If you just want to watch
 
 The following dependencies were added to `pom.xml`:
 
@@ -101,6 +99,49 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres
 spring.datasource.password=password
 ```
+
+### Spring Boot 3.1 Docker Compose Support
+
+A new module, spring-boot-docker-compose, provides integration with Docker Compose. When your app is starting up, the Docker Compose integration will look for a configuration file in the current working directory. The following files are supported:
+
+- compose.yaml
+- compose.yml
+- docker-compose.yaml
+- docker-compose.yml
+
+If you bootstrap  new project at http://start.spring.io and select the Docker Compose Module along with a service like Postgres:
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-docker-compose</artifactId>
+  <scope>runtime</scope>
+  <optional>true</optional>
+</dependency>
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <scope>runtime</scope>
+</dependency>
+```
+
+The Docker Compose file will be generated for you: 
+
+```yaml
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432'
+```
+
+By default, the services declared in the configuration file will be started up using docker compose up and connection details beans for those services will be added to the application context so that the services can be used without any further configuration. When the application stops, the services will then be shut down using docker compose down. This lifecycle management and the commands used to start up and shut down the services can be customized using the spring.docker.compose.lifecycle-management, spring.docker.compose.startup.command, and spring.docker.compose.shutdown.command configuration properties.
+
+Please refer to the [reference documentation](https://docs.spring.io/spring-boot/docs/3.1.0/reference/html/features.html#features.docker-compose) for further details, including the list of services that are currently supported.
 
 ## Populating a Database
 
@@ -322,7 +363,6 @@ All Spring Data modules are inspired by the concepts of "repository", "aggregate
 - start.spring.io
   - If you were creating a new project from scratch
 - Existing Project
-  - Checkout branch `spring-data-jdbc-start`
   - Spring Data JDBC
   - Database (H2)
 
@@ -392,6 +432,56 @@ The repository proxy has two ways to derive a store-specific query from the meth
   - listRunsWhereMilesEquals
   - Java Text Blocks
 
+```java
+public interface RunRepository extends ListCrudRepository<Run,Integer> {
+
+  List<Run> findRunsByTitleStartingWith(String title);
+  List<Run> findRunsByLocation(Location location);
+  List<Run> findRunsByMilesIsAndLocationIs(Integer miles, Location location);
+  List<Run> findRunsByStartedOnAfterAndMilesGreaterThan(LocalDateTime d, Integer miles);
+  List<Run> findRunsByStartedOnAfterAndMilesGreaterThanEqual(LocalDateTime d, Integer miles);
+
+  @Query("""
+              SELECT * FROM Run
+              where miles = :miles
+          """)
+  List<Run> listRunsWhereMilesEquals(@Param("miles") Integer miles);
+
+}
+```
+
+```java
+@GetMapping("/filter/title-starts-with/{title}")
+public List<Run> findByTitleStartingWith(@PathVariable String title) {
+    return runRepository.findRunsByTitleStartingWith(title);
+}
+
+@GetMapping("/filter/location/{location}")
+public List<Run> findRunsByLocation(@PathVariable String location) {
+    return runRepository.findRunsByLocation(Location.valueOf(location));
+}
+
+@GetMapping("/filter/miles-indoors/{miles}")
+public List<Run> findByMilesIndoors(@PathVariable Integer miles) {
+    return runRepository.findRunsByMilesIsAndLocationIs(miles, Location.INDOOR);
+}
+
+@GetMapping("/filter/miles-this-year/{miles}")
+public List<Run> findByMilesThisYear(@PathVariable Integer miles) {
+    return runRepository.findRunsByStartedOnAfterAndMilesGreaterThan(LocalDateTime.of(2023,1,1,0,0,0), miles);
+}
+
+@GetMapping("/filter/miles-this-year-equal/{miles}")
+public List<Run> findByMilesThisYearEqual(@PathVariable Integer miles) {
+    return runRepository.findRunsByStartedOnAfterAndMilesGreaterThanEqual(LocalDateTime.of(2023,1,1,0,0,0), miles);
+}
+
+@GetMapping("/filter/miles/{miles}")
+public List<Run> findByMiles(@PathVariable Integer miles) {
+    return runRepository.listRunsWhereMilesEquals(miles);
+}
+```
+
 **Further Reading**:
 - [Query By Example](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/#query-by-example)
 - [Lifecycle Events](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/#jdbc.events)
@@ -406,10 +496,4 @@ The repository proxy has two ways to derive a store-specific query from the meth
   - localhost:8080
 - Hello JDBC
   - Docker Desktop Running
-- Runnerz
-  - spring-jdbc-start branch
-- Timing
-  - 1st run through about 65 minutes
-  - Didn't get to a lot of the dynamic query derivation examples
-    - Make sure these are all in the completed branch
-  - Live Templates - Create some live templates where we can shorten some things up
+- Live Templates
