@@ -7,7 +7,7 @@
 
 Production is the greatest place on the web! We should all want to go there but we get it, it can be a scary place.
 
-![Production](./images/production.png)
+![Production](./images/production/production.png)
 
 In this lecture you will learn how to build your application using the following methods:
 
@@ -47,7 +47,7 @@ As long as you have Docker desktop running you can run the following command to 
 
 `./mvnw spring-boot:build-image`
 
-![Docker Runnerz](./images/docker_runnerz.png)
+![Docker Runnerz](./images/production/docker_runnerz.png)
 
 `docker image ls -a`
 

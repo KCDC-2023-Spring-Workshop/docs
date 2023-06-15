@@ -307,7 +307,7 @@ https://spring.io/projects/spring-data
 
 If you want to get an idea of starter support head over to start.spring.io -> Dependencies and type in "Spring Data"
 
-![start_spring_io data](./images/start_spring_io_data.png)
+![start_spring_io data](./images/data/start_spring_io_data.png)
 
 ## Spring Data JDBC
 

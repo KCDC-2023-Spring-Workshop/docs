@@ -318,9 +318,9 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.
 
 Applications that use spring-boot-devtools automatically restart whenever files on the classpath change. This can be a useful feature when working in an IDE, as it gives a very fast feedback loop for code changes. By default, any entry on the classpath that points to a directory is monitored for changes. Note that certain resources, such as static assets and view templates, do not need to restart the application.
 
-![IntelliJ + DevTools](./images/devtools_restart_01.png)
+![IntelliJ + DevTools](./images/core/devtools_restart_01.png)
 
-![IntelliJ + DevTools](./images/devtools_restart_02.png)
+![IntelliJ + DevTools](./images/core/devtools_restart_02.png)
 
 By default, each time your application restarts, a report showing the condition evaluation delta is logged.
 
