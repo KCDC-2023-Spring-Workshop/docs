@@ -17,21 +17,22 @@ The application you will build during this workshop revolves around the domain o
 ## Prerequisites
 
 - Beginner / Intermediate Java experience
-- Experience with Java Build Tools (Maven or Gradle)
+- Experience with Java Build Tools ([Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/))
 - Software
   - Java 17 JDK
+    - [SDK Man](https://sdkman.io/)
+    - [Oracle](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
   - IDE or Text Editor for Java Development
     - [IntelliJ IDEA Ultimate 2022.3](https://www.jetbrains.com/idea/download/)
       - This is what we are using (30 day trail)
       - Community Edition (Has some limitations)
-    - Visual Studio Code
-    - Spring Tool Suite
+    - [Visual Studio Code](https://code.visualstudio.com/)
+    - [Spring Tool Suite](https://spring.io/tools)
   - API Testing Tool (One of the following)
     - [Postman](https://www.postman.com/product/rest-client/)
     - [HTTPie](https://httpie.io/)
     - [curl](https://curl.se/)
-    - IntelliJ Ultimate
-  - Docker Desktop
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ## Agenda
 
