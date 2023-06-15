@@ -64,14 +64,7 @@ The application you will build during this workshop revolves around the domain o
   - Spring Data
   - Spring Data JDBC
 - Spring to Production
+  - Preparing for Production
   - Uber Jar
   - Containers
   - Native Images using GraalVM
-
-- Spring Fundamentals
-  - Core Fundamentals & Features
-  - Configuration
-  - Profiles
-  - Actuator
-  - Logging
-  - DevTools

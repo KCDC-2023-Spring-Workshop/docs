@@ -1,27 +1,32 @@
 # Production
 
+  - Preparing for Production
+  - Uber Jar
+  - Containers
+  - Native Images using GraalVM
+
 Production is the greatest place on the web! We should all want to go there but we get it, it can be a scary place.
 
 ![Production](./images/production.png)
 
-In this lecture you will learn how to build your application using the following methods: 
+In this lecture you will learn how to build your application using the following methods:
 
 - Uber JAR
 - Containers
 - Native Image
 
-## Uber JAR 
+## Uber JAR
 
 The spring-boot-loader modules lets Spring Boot support executable jar and war files. If you use the Maven plugin or the Gradle plugin, executable jars are automatically generated, and you generally do not need to know the details of how they work.
 
-To create an executable JAR run the following command: 
+To create an executable JAR run the following command:
 
 `./mvnw clean package`
 
 - **clean**: Deletes the target folder
 - **package**: Invoke Maven's package phase, which will cause the verify, compile and test phases to be invoked in the correct order.
 
-To run the executable JAR with Java run the following command: 
+To run the executable JAR with Java run the following command:
 
 `java -jar target/runnerz-0.0.1-SNAPSHOT.jar`
 
@@ -29,16 +34,16 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.ht
 
 ## Containers
 
-In the previous section you learned how to build an Uber JAR and run it on any machine that has a JDK. What if there is no JDK? 
+In the previous section you learned how to build an Uber JAR and run it on any machine that has a JDK. What if there is no JDK?
 
 This is where containers and specifically Docker containers can help us out. You have already seen some examples of us
-running a Docker Compose file to run a production grade database locally. 
+running a Docker Compose file to run a production grade database locally.
 
 You can create a production version of your Spring Boot application using Dockerfiles, or by using Cloud Native Buildpacks to create optimized docker compatible container images that you can run anywhere.
 
 https://docs.spring.io/spring-boot/docs/current/reference/html/container-images.html#container-images
 
-As long as you have Docker desktop running you can run the following command to create an OCI image: 
+As long as you have Docker desktop running you can run the following command to create an OCI image:
 
 `./mvnw spring-boot:build-image`
 
@@ -70,9 +75,9 @@ If you're using buildpacks on ARM64 (macOS) you will want to check out the artic
 
 [A new builder for Spring Boot 3 RC1 on ARM64](https://dashaun.com/posts/paketo-aarch64-builder-spring-boot-3-rc1/)
 
-## Hosts 
+## Hosts
 
-Here are a few services that you can deploy your Spring Boot Applications on: 
+Here are a few services that you can deploy your Spring Boot Applications on:
 
 - [Amazon Web Services (AWS)](https://aws.amazon.com/)
 - [Azure Spring Apps](https://azure.microsoft.com/en-us/products/spring-apps)
