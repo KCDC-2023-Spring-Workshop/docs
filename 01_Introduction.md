@@ -42,7 +42,7 @@ Join Dan Vega and DaShaun Carter as they explore what’s new in the world of Sp
 
 ### Workshop Agenda
 
-Walk through the course overview, prerequisites, and agenda found in the [README.md](../README.md).
+Walk through the course overview, prerequisites, and agenda found in the [README.md](./README.md)
 
 At this point we want to make sure everyone's laptop is ready to go before we start writing some code.
 
