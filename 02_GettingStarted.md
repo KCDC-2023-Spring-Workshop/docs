@@ -45,7 +45,7 @@ public class WelcomeMessage {
 Start the application, this class 'bean' is nowhere to be found. If you move it into a package that is above where your
 main application class is you will have the same problem.
 
-![IntelliJ Beans - WelcomeMessage](./images/intellij_beans_welcome_message.png)
+![IntelliJ Beans - WelcomeMessage](./images/getting-started/intellij_beans_welcome_message.png)
 
 `/src/main/java/org/codemash/runnerz/WelcomeMessage.java`
 
