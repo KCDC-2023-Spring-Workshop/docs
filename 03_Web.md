@@ -14,6 +14,8 @@
     - Annotations
     - CRUD REST API
     - API testing (curl/httpie/postman)
+      - validate that the postman api collection works
+      - validate that the intellij api collection works
     - CORS
   - Dependency Injection
   - Error Handling
@@ -132,18 +134,7 @@ public class RunController {
 
     private final List<Run> runs = new ArrayList<>();
 
-    @GetMapping
-    public List<Run> findAll() {
-        return runs;
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Run> findById(@PathVariable Integer id) {
-        return runs.stream().filter(run -> run.id().equals(id)).findFirst();
-    }
-
-    @PostConstruct
-    private void init() {
+    public RunController() {
         runs.add(new Run(1,
                 "Monday Morning Run",
                 LocalDateTime.now(),
@@ -158,6 +149,18 @@ public class RunController {
                 6,
                 Location.INDOOR));
     }
+
+    @GetMapping
+    public List<Run> findAll() {
+        return runs;
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Run> findById(@PathVariable Integer id) {
+        return runs.stream().filter(run -> run.id().equals(id)).findFirst();
+    }
+
+
 
 }
 ```
@@ -323,6 +326,34 @@ class RunControllerTest {
 [Spring Constructor Injection: Why is it the recommended approach to Dependency Injection?](https://youtu.be/aX-bgylmprA)
 
 
+### PostConstruct
+
+[Using @PostConstruct and @PreDestroy](https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/postconstruct-and-predestroy-annotations.html)
+
+- When the constructor is called, the bean is not yet initialized - i.e. no dependencies are injected. In the @PostConstruct method the bean is fully initialized and you can use the dependencies.
+
+- This is the contract that guarantees that this method will be invoked only once in the bean lifecycle. It may happen (though unlikely) that a bean is instantiated multiple times by the container in its internal working, but it guarantees that @PostConstruct will be invoked only once.
+
+```java
+    @PostConstruct
+    private void init() {
+        runs.add(new Run(1,
+                "Monday Morning Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
+                3,
+                Location.INDOOR));
+
+        runs.add(new Run(2,
+                "Wednesday Evening Run",
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
+                6,
+                Location.INDOOR));
+    }
+```
+
+
 ## Building REST APIs
 
   - Building REST APIs
@@ -355,32 +386,11 @@ HTTP APIs in general are sometimes colloquially referred to as RESTful APIs, RES
 
 HTTP defines a set of request methods to indicate the desired action to be performed for a given resource. Although they can also be nouns, these request methods are sometimes referred to as HTTP verbs. Each of them implements a different semantic, but some common features are shared by a group of them: e.g. a request method can be safe, idempotent, or cacheable.
 
-GET
-The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-
-HEAD
-The HEAD method asks for a response identical to a GET request, but without the response body.
-
-POST
-The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-
-PUT
-The PUT method replaces all current representations of the target resource with the request payload.
-
-DELETE
-The DELETE method deletes the specified resource.
-
-CONNECT
-The CONNECT method establishes a tunnel to the server identified by the target resource.
-
-OPTIONS
-The OPTIONS method describes the communication options for the target resource.
-
-TRACE
-The TRACE method performs a message loop-back test along the path to the target resource.
-
-PATCH
-The PATCH method applies partial modifications to a resource.
+- **GET**: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+- **HEAD**: The HEAD method asks for a response identical to a GET request, but without the response body.
+- **POST**: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+- **PUT**: The PUT method replaces all current representations of the target resource with the request payload.
+- **DELETE**: The DELETE method deletes the specified resource.
 
 ### HTTP Response Status Codes
 
@@ -393,6 +403,22 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 - Server error responses (500 – 599)
 
 ### Annotations
+
+- [@Component](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Component.html) - Indicates that an annotated class is a "component". Such classes are considered as candidates for auto-detection when using annotation-based configuration and classpath scanning.
+  - [@Controller](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Controller.html) - Indicates that an annotated class is a "Controller" (e.g. a web controller).
+  - [@RestController](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) - A convenience annotation that is itself annotated with @Controller and @ResponseBody.
+  - [@Service](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Service.html) - Indicates that an annotated class is a "Service", originally defined by Domain-Driven Design (Evans, 2003) as "an operation offered as an interface that stands alone in the model, with no encapsulated state."
+  - [@Repository](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Repository.html) - Indicates that an annotated class is a "Repository", originally defined by Domain-Driven Design (Evans, 2003) as "a mechanism for encapsulating storage, retrieval, and search behavior which emulates a collection of objects".
+- [@Bean](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html) - Indicates that a method produces a bean to be managed by the Spring container.
+- [@RequestMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html) - Annotation for mapping web requests onto methods in request-handling classes with flexible method signatures.
+  - [@GetMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) - Annotation for mapping HTTP GET requests onto specific handler methods.
+  - [@PostMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) - Annotation for mapping HTTP POST requests onto specific handler methods.
+  - [@PutMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) - Annotation for mapping HTTP PUT requests onto specific handler methods.
+  - [@DeleteMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/DeleteMapping.html) - Annotation for mapping HTTP DELETE requests onto specific handler methods.
+- [@PathVariable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) - Annotation which indicates that a method parameter should be bound to a URI template variable. Supported for RequestMapping annotated handler methods.
+- [@RequestParam](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html) - Annotation which indicates that a method parameter should be bound to a web request parameter.
+- [@RequestBody](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestBody.html) - Annotation indicating a method parameter should be bound to the body of the web request.
+- [@ResponseStatus](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html) - Marks a method or exception class with the status code() and reason() that should be returned.
 
 ### CRUD REST API
 
