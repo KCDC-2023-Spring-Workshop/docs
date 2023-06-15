@@ -1,8 +1,25 @@
-# Data 
+# Data
 
-At the heart of any application is the data that drives it. Traditionally Java has made connecting to a datasource, 
-reading and persisting data verbose and complex. Spring Boot and Spring data takes this process and 
-simplifies each step so that you can focus on building applications. 
+  - Java + SQL Databases
+  - Spring Data JDBC API
+  - Configuring a Datasource
+    - H2
+    - PostgreSQL
+  - Populate a Database
+    - DDL Script
+    - Programmatically
+  - JDBC Template
+  - Spring Data
+    - Spring Data Modules
+    - Spring Boot Starters
+  - Spring Data JDBC
+    - Dependencies
+    - Persistent Entities
+    - Repositories
+
+At the heart of any application is the data that drives it. Traditionally Java has made connecting to a datasource,
+reading and persisting data verbose and complex. Spring Boot and Spring data takes this process and
+simplifies each step so that you can focus on building applications.
 
 Spring Boot integrates with a number of data technologies, both SQL and NoSQL.
 
@@ -15,8 +32,8 @@ https://github.com/CodeMash-2023-Spring-Workshop/hello-jdbc
 
 ## Spring JDBC API
 
-Spring provides a starter that gives us a database Connectivity API that defines how a client may connect and query 
-a database. To get started head over to start.spring.io and select `JDBC API` from the dependency's dropdown. 
+Spring provides a starter that gives us a database Connectivity API that defines how a client may connect and query
+a database. To get started head over to start.spring.io and select `JDBC API` from the dependency's dropdown.
 
 This isn't Spring Data - We will cover that later
 
@@ -45,15 +62,15 @@ The following dependencies were added to `pom.xml`:
 </dependencies>
 ```
 
-## Configuring a Datasource 
+## Configuring a Datasource
 
 Java’s `javax.sql.DataSource` interface provides a standard method of working with database connections. Traditionally, a 'DataSource' uses a URL along with some credentials to establish a database connection.
 
-It is often convenient to develop applications by using an in-memory embedded database. Obviously, in-memory databases do not provide persistent storage. You need to populate your database when your application starts and be prepared to throw away data when your application ends. 
+It is often convenient to develop applications by using an in-memory embedded database. Obviously, in-memory databases do not provide persistent storage. You need to populate your database when your application starts and be prepared to throw away data when your application ends.
 
 An in-memory embedded database is great for:
 
-- Rapid prototyping 
+- Rapid prototyping
 - Demos
 - Testing (traditionally)
 
@@ -87,9 +104,9 @@ spring.datasource.password=password
 
 ## Populating a Database
 
-You have a few options for populating a database: 
+You have a few options for populating a database:
 
-- DDL Script 
+- DDL Script
 - Programmatically
 - Database Migration Tool
 
@@ -118,7 +135,7 @@ INSERT INTO Run(title,started_on,completed_on,miles,location)
 VALUES ('Tuesday Evening Run',CURRENT_TIMESTAMP(),TIMESTAMPADD('minute',60,CURRENT_TIMESTAMP()),6,'INDOOR');
 ```
 
-Run the application and then set the following property and rerun the application: 
+Run the application and then set the following property and rerun the application:
 
 ```properties
 logging.level.org.springframework.jdbc=DEBUG
@@ -127,7 +144,7 @@ logging.level.org.springframework.jdbc=DEBUG
 #### Programmatically
 
 You can use the `CommandLineRunner` Interface which is used to indicate that a bean should _run_ when it is contained within
-* a **SpringApplication**. We aren't going to be able to insert data just yet but I want to show you 2 approaches. 
+* a **SpringApplication**. We aren't going to be able to insert data just yet but I want to show you 2 approaches.
 
 ```java
 @Component
@@ -152,9 +169,9 @@ We aren't going to cover this option in this workshop but a popular tool for thi
 
 ## JDBC Template
 
-Spring’s `JdbcTemplate` and `NamedParameterJdbcTemplate` classes are auto-configured, and you can `@Autowire` them directly into your own beans. 
+Spring’s `JdbcTemplate` and `NamedParameterJdbcTemplate` classes are auto-configured, and you can `@Autowire` them directly into your own beans.
 
-**Notes:** 
+**Notes:**
   - Discuss [JdbcTemplate](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html) vs [NamedParameterJdbcTemplate](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/namedparam/NamedParameterJdbcTemplate.html)
   - Assigning dynamic parameters "where id = ?" vs "where id = :id"
 
@@ -236,7 +253,7 @@ public class RunService {
 }
 ```
 
-### Command Line Runner 
+### Command Line Runner
 
 Now that you have a service that can create a new `Run` lets revisit that `CommandLineRunner`.
 
@@ -274,7 +291,7 @@ Spring Data’s mission is to provide a familiar and consistent, Spring-based pr
   - Spring Data Redis - Easy configuration and access to Redis from Spring applications.
   - Spring Data REST - Exports Spring Data repositories as hypermedia-driven RESTful resources.
   - Spring Data for Apache Cassandra - Easy configuration and access to Apache Cassandra or large scale, highly available, data oriented Spring applications.
-  - More ...  
+  - More ...
 - Community Modules
   - Spring Data Couchbase - Spring Data module for Couchbase.
   - Spring Data Azure Cosmos DB - Spring Data module for Microsoft Azure Cosmos DB.
@@ -285,7 +302,7 @@ Spring Data’s mission is to provide a familiar and consistent, Spring-based pr
   - More...
 
 https://spring.io/projects/spring-data
- 
+
 ### Spring Boot Starters
 
 If you want to get an idea of starter support head over to start.spring.io -> Dependencies and type in "Spring Data"
@@ -300,7 +317,7 @@ All Spring Data modules are inspired by the concepts of "repository", "aggregate
 
 [Spring Data JDBC Tutorial](https://youtu.be/l_T0nQNbFiM)
 
-### Dependencies 
+### Dependencies
 
 - start.spring.io
   - If you were creating a new project from scratch
@@ -327,11 +344,11 @@ The following dependencies were added to `pom.xml`:
 
 ### Persistent Entities
 
-Before we start writing some code lets talk about some terms you will encounter: 
+Before we start writing some code lets talk about some terms you will encounter:
 
 - **DTO**: A class whose purpose is to transfer data, usually from the server to the client (or vie versa).
 - **Entity**: A class whose purpose is to store/retrieve data to/from a data store.
-- **POJO**: A class that doesn't extend any framework code not has any sort of restrictions baked into it. 
+- **POJO**: A class that doesn't extend any framework code not has any sort of restrictions baked into it.
 
 * Thank you to Greg Turnquist's new book [Learning Spring Boot 3.0](https://amzn.to/3Z8b8h4) for defining those terms for us.
 
@@ -347,10 +364,10 @@ https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/#jdbc.entity
 
 ### Repositories
 
-The goal of the Spring Data repository abstraction is to significantly reduce the amount of boilerplate code required to implement data access layers for various persistence stores. 
+The goal of the Spring Data repository abstraction is to significantly reduce the amount of boilerplate code required to implement data access layers for various persistence stores.
 
 In the example you are working on today you need to provide CRUD operations for a single
-entity. Even working on a single entity there is a lot of boilerplate code that has to be written before you get to the critical 
+entity. Even working on a single entity there is a lot of boilerplate code that has to be written before you get to the critical
 business requirements you have been given. How many times have you been a project and asked to write a query to do x,y,and z sort it by these fields and oh ya please only return 10 records at a time.
 
 - Repository
