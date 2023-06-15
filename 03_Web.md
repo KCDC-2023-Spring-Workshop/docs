@@ -20,8 +20,6 @@
       - GET/POST/PUT/DELETE/
       - Filter to show off `@RequestParam`
     - API testing (curl/httpie/postman)
-      - validate that the postman api collection works
-      - validate that the intellij api collection works
     - CORS
   - Data Validation
   - Error Handling

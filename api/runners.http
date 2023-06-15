@@ -1,0 +1,38 @@
+### Find All Runs
+GET http://localhost:8080/api/runs
+
+### Get Run by ID
+GET http://localhost:8080/api/runs/1
+
+### Create new Run
+POST http://localhost:8080/api/runs
+Content-Type: application/json
+
+{
+  "id": null,
+  "title": "Wednesday Afternoon Run",
+  "startedOn": "2022-12-12T15:00:12.49766",
+  "completedOn": "2022-12-12T15:20:12.497678",
+  "miles": 2,
+  "location": "INDOOR"
+}
+
+### Update existing Run
+PUT http://localhost:8080/api/runs/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "Wednesday Afternoon Run!!!",
+  "startedOn": "2022-12-12T15:00:12.49766",
+  "completedOn": "2022-12-12T15:20:12.497678",
+  "miles": 2,
+  "location": "INDOOR"
+}
+
+### Delete Run by Id
+DELETE http://localhost:8080/api/runs/3
+
+
+### Filter runs by title that starts with
+GET http://localhost:8080/api/runs/filter/title-starts-with/Monday
