@@ -1,5 +1,22 @@
 # Getting Started
 
+  - start.spring.io
+  - Understanding the project structure
+    - `pom.xml`
+      - Spring Boot Starters
+      - Dependencies
+          - Versions
+          - Adding your own dependencies
+    - Main Application Class
+      - @SpringBootApplication annotation
+  - How to start the application
+    - IDE
+    - Maven
+    - View the application / browser & command-line
+  - Structuring your code
+    - package by layer
+    - package by feature
+    - hexigonal architecture
 
 ## Structuring you code
 
