@@ -30,7 +30,7 @@
 - Dan Vega
 - DaShaun Carter
 
-// TODO: Add bios here: This could just be text based bio if we plan to use excalidraw walkthrough
+// TODO: Add bios here
 
 ### Spring Office Hours
 
