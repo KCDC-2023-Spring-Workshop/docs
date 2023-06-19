@@ -1,23 +1,5 @@
 # Data
 
-  - Java + SQL Databases
-  - Spring Data JDBC API
-  - Configuring a Datasource
-    - H2
-    - PostgreSQL
-    - Spring Boot Docker Compose Module
-  - Populate a Database
-    - DDL Script
-    - Programmatically
-  - JDBC Template
-  - Spring Data
-    - Spring Data Modules
-    - Spring Boot Starters
-  - Spring Data JDBC
-    - Dependencies
-    - Persistent Entities
-    - Repositories
-
 At the heart of any application is the data that drives it. Traditionally Java has made connecting to a datasource,
 reading and persisting data verbose and complex. Spring Boot and Spring data takes this process and
 simplifies each step so that you can focus on building applications.
