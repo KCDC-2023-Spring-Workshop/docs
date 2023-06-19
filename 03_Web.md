@@ -1,30 +1,7 @@
 # Spring MVC (Web)
 
-  - RunnerzUI Introduction
-  - Model View Controller (MVC)
-    - What is MVC (Model/View/Controller)
-  - Spring MVC
-    - Model
-    - Controller
-  - Spring Core
-    - Spring IoC Container / Application Context
-    - Spring Beans
-    - Dependency Injection
-  - Building REST APIs
-    - What is an API
-    - What is REST API
-      - HTTP Request Methods
-      - HTTP Response Status Codes
-    - Annotations
-    - CRUD REST API
-      - GET/POST/PUT/DELETE/
-      - Filter to show off `@RequestParam`
-    - API testing (curl/httpie/postman)
-    - CORS
-  - Data Validation
-  - Error Handling
-  - RunnerzUI (UI/REST API/CORS/etc...)
-
+In this section we will begin creating the web portion of our Runnerz application. You will learn about topics such as
+Spring MVC, Beans, Dependency Injection, REST APIs, Data Validation, Error Handling and more!
 
 ## RunnerzUI Introduction
 
