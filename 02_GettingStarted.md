@@ -16,7 +16,7 @@
   - Structuring your code
     - package by layer
     - package by feature
-    - hexigonal architecture
+    - Hexagonal architecture
 
 ## Structuring you code
 
