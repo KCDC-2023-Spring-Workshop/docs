@@ -1,36 +1,24 @@
 # Introduction
 
-  - Who are we
-  - Spring Office Hours
-  - Agenda (README.md)
-    - Workshop Agenda / Sections
-    - Prerequisites
-      - java -version
-      - macOS/Windows/Linux
-        - DaShaun show Windows / Linux setup
-  - What is Spring?
-    - What types of applications can you build with Spring? (Motivation for the workshop)
-    - Spring Framework vs Spring Boot
-    - Spring.io walkthrough
-      - Reference Documentation
-      - API Documentation
-      - Spring Project Ecosystem
-    - Tanzu Developer Center
-  - Spring Boot Features
-    - Spring Boot Starters (Dependency Management)
-    - Auto Configuration
-    - Simplified Deployment
-  - What are we going to build?
-    - Github Repository
-    - Source Code + Slides Repo
-    - Provide a list of resources (cover this)
+In this section we will tell you a little bit about us, the agenda for this workshop and a gentle introduction to Spring.
 
 ## Who are we?
 
 - Dan Vega
 - DaShaun Carter
 
-// TODO: Add bios here
+### About Dan Vega
+
+- Husband & Father
+- Cleveland, OH
+- Software Developer 22+ Years
+- Spring Developer Advocate
+- Content Creator www.danvega.dev
+  - Writing - Blog & Newsletter
+  - YouTuber
+- @therealdanvega
+
+### About DaShaun Carter
 
 ### Spring Office Hours
 
@@ -52,6 +40,14 @@ At this point we want to make sure everyone's laptop is ready to go before we st
 
 
 ### What is Spring?
+
+- What types of applications can you build with Spring? (Motivation for the workshop)
+- Spring Framework vs Spring Boot
+- Spring.io walkthrough
+  - Reference Documentation
+  - API Documentation
+  - Spring Project Ecosystem
+- Tanzu Developer Center
 
 ![What is Spring](./images/introduction/what-is-spring.png)
 
