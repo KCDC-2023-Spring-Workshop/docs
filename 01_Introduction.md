@@ -57,6 +57,15 @@ At this point we want to make sure everyone's laptop is ready to go before we st
 
 ### What are we going to learn?
 
+### Spring Documentation 
+
+- https://spring.io/
+- https://spring.io/blog
+- https://spring.io/guides 
+- https://spring.io/projects
+- https://spring.io/projects/spring-framework
+- https://spring.io/projects/spring-boot 
+
 ![What are we going to learn](./images/introduction/what-are-we-going-learn.png)
 
 ### What are we going to build?
