@@ -20,6 +20,16 @@ In this section we will tell you a little bit about us, the agenda for this work
 
 ### About DaShaun Carter
 
+- Husband & Father
+- Kansas City, MO
+- Youth Coach
+- Struggling triathlete
+- Raspberry Pi enthusiast
+- Former professional cheerleader
+- Spring Developer Advocate
+- Deliberately practicing to build, run, and manage, better software, faster.
+- @dashaun
+
 ### Spring Office Hours
 
 ![Spring Office Hours](./images/introduction/spring-office-hours.png)
@@ -38,7 +48,6 @@ At this point we want to make sure everyone's laptop is ready to go before we st
 - macOS/Windows/Linux
   - DaShaun show Windows / Linux setup
 
-
 ### What is Spring?
 
 - What types of applications can you build with Spring? (Motivation for the workshop)
@@ -48,6 +57,7 @@ At this point we want to make sure everyone's laptop is ready to go before we st
   - API Documentation
   - Spring Project Ecosystem
 - Tanzu Developer Center
+- Spring.Academy
 
 ![What is Spring](./images/introduction/what-is-spring.png)
 

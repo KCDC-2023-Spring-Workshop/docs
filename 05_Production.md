@@ -94,16 +94,35 @@ Here are a few services that you can deploy your Spring Boot Applications on:
 - [Fly.io](https://fly.io/)
 - [Porter](https://porter.run/)
 
-## Resources
+## Spring Boot Actuator
 
-Here are a few videos from Spring Office Hours and Dan's YouTube channel on moving your Spring Boot applications into production.
+Spring Boot Actuator delivers features to make your application production-ready.
 
-- [Spring Office Hours: Spring to Production Part 1](https://tanzu.vmware.com/developer/tv/spring-office-hours/0015/)
-- [Spring Office Hours: Spring to Production Part 2](https://tanzu.vmware.com/developer/tv/spring-office-hours/0016/)
-- [Spring Boot Azure](https://youtu.be/53T_R3xAPTg)
-- [Spring Boot Heroku](https://youtu.be/lGtTOLKuvqs)
-- [Spring BOot Railway](https://youtu.be/5sVxvF47dcU)
+- Add Actuator Dependency (always!)
+    - No version required
 
-## Deploy to Production
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+```
+> pom.xml
 
-steps to deploy to production
+```text
+management.endpoints.enabled-by-default=true
+management.endpoints.web.exposure.include=*
+management.endpoint.health.show-details=always
+management.endpoint.health.show-components=always
+```
+
+## Other Production Grade, Cloud Ready Features
+
+- Spring REST Docs
+- Spring Cloud Config
+- Spring Cloud Discovery
+
+## Deploy to Production Demo
+
+- Use buildpack to create OCI image
+- Deploy image to Kubernetes using Knative Serving

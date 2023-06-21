@@ -48,6 +48,8 @@ The application you will build during this workshop revolves around the domain o
   - Project Structure
   - How to start the application
   - Structuring your code
+  - Simple REST Controller
+  - Bootstrap a simple Spring Boot Front End
 - Spring Web (MVC)
   - Runnerz UI Application Introduction
   - Model View Controller (MVC)
@@ -70,3 +72,5 @@ The application you will build during this workshop revolves around the domain o
   - Uber Jar
   - Containers
   - Native Images using GraalVM
+  - Production Grade Cloud Ready Features
+  - Kubernetes deployment with Knative Serving
